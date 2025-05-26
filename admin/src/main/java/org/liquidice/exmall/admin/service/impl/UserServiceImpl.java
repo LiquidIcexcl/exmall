@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.liquidice.exmall.admin.common.biz.user.UserContext;
+import org.liquidice.exmall.admin.common.enums.UserErrorCodeEnum;
 import org.liquidice.exmall.admin.dao.entity.UserDO;
 import org.liquidice.exmall.admin.dao.mapper.UserMapper;
 import org.liquidice.exmall.admin.dto.req.UserLoginReqDTO;
@@ -31,6 +33,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import static org.liquidice.exmall.admin.common.constant.RedisCacheConstant.LOCK_USER_REGISTER_KEY;
+import static org.liquidice.exmall.admin.common.constant.RedisCacheConstant.USER_LOGIN_KEY;
+import static org.liquidice.exmall.admin.common.enums.UserErrorCodeEnum.*;
 
 /**
  * 用户接口层
@@ -76,7 +82,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
             if (inserted < 1) {
                 throw new ClientException(USER_SAVE_ERROR);
             }
-            groupService.saveGroup(requestParam.getUsername(), "默认分组");
             userRegisterCachePenetrationBloomFilter.add(requestParam.getUsername());
         } catch (DuplicateKeyException ex) {
             throw new ClientException(USER_EXIST);
@@ -114,7 +119,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                     .orElseThrow(() -> new ClientException("用户登录错误"));
             return new UserLoginRespDTO(token);
         }
-        /**
+
+        /* *
          * Hash
          * Key：login_用户名
          * Value：

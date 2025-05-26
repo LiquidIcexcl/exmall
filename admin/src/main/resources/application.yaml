@@ -1,0 +1,26 @@
+server:
+    port: 8002
+
+spring:
+    application:
+        name: exmall-admin
+    datasource:
+        # ShardingSphere ? Driver ???????????????
+        driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+        # ShardingSphere ??????
+        url: jdbc:shardingsphere:classpath:shardingsphere-config.yaml
+    data:
+        redis:
+            host: common-redis-dev.magestack.cn
+            port: 19389
+            password: "Sm9sVXBOYJjI030b5tz0trjpzvZzRhtZmEbv0uOImcD1wEDOPfeaqNU4PxHob/Wp"
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+
+exmall:
+    flow-limit:
+        enable: true
+        time-window: 1
+        max-access-count: 20
