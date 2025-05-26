@@ -43,6 +43,11 @@ public class UserDO extends BaseDO {
     private String email;
 
     /**
+     * 用户头像
+     */
+    private String avatarUrl;
+
+    /**
      * 是否为商户
      */
     private Boolean isMerchant;

@@ -22,11 +22,6 @@ public class UserConfigurationDO extends BaseDO {
     private String uid;
 
     /**
-     * 用户头像
-     */
-    private String avatar;
-
-    /**
      * 用户是否使用深色模式
      */
     private String isNight;
