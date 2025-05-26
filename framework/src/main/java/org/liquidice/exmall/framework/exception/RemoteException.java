@@ -1,8 +1,8 @@
 package org.liquidice.exmall.framework.exception;
 
 
-import org.liquidice.shortlink.admin.common.convention.errorcode.BaseErrorCode;
-import org.liquidice.shortlink.admin.common.convention.errorcode.IErrorCode;
+import org.liquidice.exmall.framework.errorcode.BaseErrorCode;
+import org.liquidice.exmall.framework.errorcode.IErrorCode;
 
 /**
  * 远程服务调用异常

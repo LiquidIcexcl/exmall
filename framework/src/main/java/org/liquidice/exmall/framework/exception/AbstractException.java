@@ -1,7 +1,7 @@
 package org.liquidice.exmall.framework.exception;
 
 import lombok.Getter;
-import org.liquidice.shortlink.admin.common.convention.errorcode.IErrorCode;
+import org.liquidice.exmall.framework.errorcode.IErrorCode;
 import org.springframework.util.StringUtils;
 
 import java.util.Optional;

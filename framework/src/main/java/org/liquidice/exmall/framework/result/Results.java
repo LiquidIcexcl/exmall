@@ -1,7 +1,8 @@
 package org.liquidice.exmall.framework.result;
 
-import org.liquidice.shortlink.admin.common.convention.errorcode.BaseErrorCode;
-import org.liquidice.shortlink.admin.common.convention.exception.AbstractException;
+
+import org.liquidice.exmall.framework.errorcode.BaseErrorCode;
+import org.liquidice.exmall.framework.exception.AbstractException;
 
 import java.util.Optional;
 
