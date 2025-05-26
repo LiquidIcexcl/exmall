@@ -1,13 +1,13 @@
-package org.liquidice.exmall;
+package org.liquidice.exmall.message;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ExmallApplication {
+public class MessageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ExmallApplication.class, args);
+        SpringApplication.run(MessageApplication.class, args);
     }
 
 }
