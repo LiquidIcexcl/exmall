@@ -2,53 +2,256 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>org.liquidice</groupId>
+    <groupId>org.liquidice.exmall</groupId>
     <artifactId>exmall-all</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>exmall</name>
-    <description>exmall</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
+    <packaging>pom</packaging>
+
     <developers>
-        <developer/>
+        <developer>
+            <name>萧诚磊</name>
+            <email>895155973@qq.com</email>
+            <url>https://www.wolai.com/koishi/3DiZtqJnx4VQpguFRtTMvW</url>
+        </developer>
     </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
+    <modules>
+        <!-- 后管模块：创建优惠券、店家查看以及管理优惠券、创建优惠券发放批次等 -->
+        <module>admin</module>
+
+        <!-- 分发模块：负责按批次分发用户优惠券，可提供应用弹框推送、站内信或短信通知等 -->
+        <module>aggregation</module>
+
+        <!-- 购物车模块：提供用户购物车功能，支持添加、删除商品等 -->
+        <module>cart</module>
+
+        <!-- 优惠券模块：提供用户优惠券管理功能，包括创建、查看、使用等 -->
+        <module>coupon</module>
+
+        <!-- 基础架构模块：仅包含公共内容，一个包引入构建所有组件 -->
+        <module>framework</module>
+
+        <!-- 网关模块：提供统一的网关服务，处理所有外部请求 -->
+        <module>gateway</module>
+
+        <!-- 消息模块：提供用户系统消息 -->
+        <module>message</module>
+
+        <!-- 订单模块：处理用户下单、订单状态管理、退换货等 -->
+        <module>order</module>
+
+        <!-- 支付模块：处理用户支付请求，支持多种支付方式 -->
+        <module>pay</module>
+
+        <!-- 产品模块：提供商品信息、分类、品牌等数据 -->
+        <module>product</module>
+
+    </modules>
+
+
     <properties>
         <java.version>17</java.version>
+        <spring-boot.version>3.0.7</spring-boot.version>
+        <spring-cloud.version>2022.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <mybatis-spring-boot-starter.version>3.0.2</mybatis-spring-boot-starter.version>
+        <shardingsphere.version>5.3.2</shardingsphere.version>
+        <fastjson2.version>2.0.36</fastjson2.version>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
+        <dozer-core.version>6.5.2</dozer-core.version>
+        <hutool-all.version>5.8.27</hutool-all.version>
+        <redisson.version>3.27.2</redisson.version>
+        <guava.version>30.0-jre</guava.version>
+        <jsoup.version>1.15.3</jsoup.version>
+        <knife4j-openapi3-jakarta-spring-boot-starter.version>4.5.0
+        </knife4j-openapi3-jakarta-spring-boot-starter.version>
+        <bizlog-sdk.version>3.0.6</bizlog-sdk.version>
+        <javafaker.version>1.0.2</javafaker.version>
+        <easyexcel.version>4.0.1</easyexcel.version>
+        <xxl-job.version>2.4.1</xxl-job.version>
+        <rocketmq-spring-boot-starter.version>2.3.0</rocketmq-spring-boot-starter.version>
+        <spotless-maven-plugin.version>2.22.1</spotless-maven-plugin.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <elasticsearch-spring-boot-starter.version>2.6.12</elasticsearch-spring-boot-starter.version>
+        <java.version>17</java.version>
+        <spring-boot.version>3.0.7</spring-boot.version>
+        <spring-cloud.version>2022.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <mybatis-spring-boot-starter.version>3.0.2</mybatis-spring-boot-starter.version>
+        <shardingsphere.version>5.3.2</shardingsphere.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <fastjson2.version>2.0.36</fastjson2.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <dozer-core.version>6.5.2</dozer-core.version>
+        <hutool-all.version>5.8.27</hutool-all.version>
+        <redisson.version>3.27.2</redisson.version>
+        <guava.version>30.0-jre</guava.version>
+        <jsoup.version>1.15.3</jsoup.version>
+        <easyexcel.version>3.1.3</easyexcel.version>
+        <spotless-maven-plugin.version>2.22.1</spotless-maven-plugin.version>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-jdbc-core</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.dozermapper</groupId>
+                <artifactId>dozer-core</artifactId>
+                <version>${dozer-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j-openapi3-jakarta-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.mouzt</groupId>
+                <artifactId>bizlog-sdk</artifactId>
+                <version>${bizlog-sdk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>${javafaker.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${elasticsearch-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless-maven-plugin.version}</version>
+                <configuration>
+                    <java>
+                        <licenseHeader>
+                            <!-- ${maven.multiModuleProjectDirectory} 爆红属于正常，并不影响编译或者运行，忽略就好 -->
+                            <file>${maven.multiModuleProjectDirectory}/copyright/copyright.txt</file>
+                        </licenseHeader>
+                    </java>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
