@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.liquidice</groupId>
-    <artifactId>exmall</artifactId>
+    <artifactId>exmall-all</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>exmall</name>
     <description>exmall</description>
