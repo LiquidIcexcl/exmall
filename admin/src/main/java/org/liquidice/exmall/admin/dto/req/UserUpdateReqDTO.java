@@ -26,4 +26,9 @@ public class UserUpdateReqDTO {
      * 邮箱
      */
     private String email;
+
+    /**
+     * 是否为商户
+     */
+    private Integer isMerchant;
 }

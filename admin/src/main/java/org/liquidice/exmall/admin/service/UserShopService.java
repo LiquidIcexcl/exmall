@@ -23,12 +23,12 @@ public interface UserShopService extends IService<UserShopDO> {
      * @param requestParam 商户信息
      * @return 商户信息
      */
-    UserShopRespDTO createShop(Long uid, UserShopReqDTO requestParam);
+    UserShopRespDTO createShop(UserShopReqDTO requestParam);
 
     /**
      * 更新商户信息
      * @param uid 用户ID
      * @param requestParam 商户信息
      */
-    void updateShop(Long uid, UserShopReqDTO requestParam);
+    void updateShop(UserShopReqDTO requestParam);
 }

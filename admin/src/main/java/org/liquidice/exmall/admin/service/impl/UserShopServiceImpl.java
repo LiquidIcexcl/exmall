@@ -41,16 +41,16 @@ public class UserShopServiceImpl extends ServiceImpl<UserShopMapper, UserShopDO>
     }
 
     @Override
-    public UserShopRespDTO createShop(Long uid, UserShopReqDTO requestParam) {
+    public UserShopRespDTO createShop(UserShopReqDTO requestParam) {
         LambdaQueryWrapper<UserShopDO> queryWrapper = Wrappers.lambdaQuery(UserShopDO.class)
-                .eq(UserShopDO::getUid, uid);
+                .eq(UserShopDO::getUid, requestParam.getUid());
         UserShopDO userShopDO = baseMapper.selectOne(queryWrapper);
         if (userShopDO != null) {
             throw new ServiceException(USER_SHOP_IS_EXIST);
         }
         userShopDO = new UserShopDO();
         BeanUtils.copyProperties(requestParam, userShopDO);
-        userShopDO.setUid(uid);
+        userShopDO.setUid(requestParam.getUid());
         boolean save = baseMapper.insert(userShopDO) > 0;
         if (!save) {
             throw new ServiceException("创建失败");
@@ -61,9 +61,9 @@ public class UserShopServiceImpl extends ServiceImpl<UserShopMapper, UserShopDO>
     }
 
     @Override
-    public void updateShop(Long uid, UserShopReqDTO requestParam) {
+    public void updateShop(UserShopReqDTO requestParam) {
         LambdaUpdateWrapper<UserShopDO> updateWrapper = Wrappers.lambdaUpdate(UserShopDO.class)
-                .eq(UserShopDO::getUid, uid)
+                .eq(UserShopDO::getUid, requestParam.getUid())
                 .eq(UserShopDO::getDelFlag, 0);
         UserShopDO userShopDO = new UserShopDO();
         BeanUtils.copyProperties(requestParam, userShopDO);
