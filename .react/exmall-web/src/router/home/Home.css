@@ -1,0 +1,44 @@
+.profile-card {
+    background-color: #1a478c;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .avatar-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ccc;
+  }
+  
+  .name {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .email {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  .service {
+    font-size: 12px;
+    margin: 0;
+  }
