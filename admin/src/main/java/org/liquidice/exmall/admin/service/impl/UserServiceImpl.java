@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.liquidice.exmall.admin.common.biz.user.UserContext;
+import org.liquidice.exmall.admin.common.biz.user.UserInfoDTO;
 import org.liquidice.exmall.admin.common.enums.UserErrorCodeEnum;
 import org.liquidice.exmall.admin.dao.entity.UserDO;
 import org.liquidice.exmall.admin.dao.mapper.UserMapper;
@@ -93,7 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     @Override
     public void update(UserUpdateReqDTO requestParam) {
         if (!Objects.equals(requestParam.getUsername(), UserContext.getUsername())) {
-            throw new ClientException("当前登录用户修改请求异常");
+            throw new ClientException("当前登录用户修改请求异常"+UserContext.getUsername());
         }
         LambdaUpdateWrapper<UserDO> updateWrapper = Wrappers.lambdaUpdate(UserDO.class)
                 .eq(UserDO::getUsername, requestParam.getUsername());
@@ -117,6 +118,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                     .findFirst()
                     .map(Object::toString)
                     .orElseThrow(() -> new ClientException("用户登录错误"));
+            UserInfoDTO userInfoDTO = UserInfoDTO.builder()
+                    .userId(userDO.getUid().toString())
+                    .username(userDO.getUsername())
+                    .build();
+            UserContext.setUser(userInfoDTO);
             return new UserLoginRespDTO(token);
         }
 
@@ -130,6 +136,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         String uuid = UUID.randomUUID().toString();
         stringRedisTemplate.opsForHash().put(USER_LOGIN_KEY + requestParam.getUsername(), uuid, JSON.toJSONString(userDO));
         stringRedisTemplate.expire(USER_LOGIN_KEY + requestParam.getUsername(), 30L, TimeUnit.MINUTES);
+        UserInfoDTO userInfoDTO = UserInfoDTO.builder()
+                .userId(userDO.getUid().toString())
+                .username(userDO.getUsername())
+                .build();
+        UserContext.setUser(userInfoDTO);
         return new UserLoginRespDTO(uuid);
     }
 

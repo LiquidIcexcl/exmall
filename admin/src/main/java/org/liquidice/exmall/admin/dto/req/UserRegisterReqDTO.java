@@ -25,5 +25,5 @@ public class UserRegisterReqDTO {
     /**
      * 邮箱
      */
-    private String mail;
+    private String email;
 }
