@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.liquidice.exmall.framework.database.BaseDO;
 
 /**
- * 商品Detail类
+ * 商品详情类
  */
 @Data
 @Builder
