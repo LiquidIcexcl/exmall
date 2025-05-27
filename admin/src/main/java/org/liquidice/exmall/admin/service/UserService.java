@@ -58,4 +58,18 @@ public interface UserService extends IService<UserDO> {
      */
     void logout(String username, String token);
 
+    /**
+     * 根据用户ID 判断 用户是否为商户
+     * @param uid 用户ID
+     * @return 是否为商户
+     */
+    Boolean userIsMerchant(Long uid);
+
+    /**
+     * 根据用户ID 执行 用户成为商户
+     * @param uid 商户ID
+     * @return 商户信息
+     */
+    UserRespDTO becomeMerchant(Long uid);
+
 }

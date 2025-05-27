@@ -50,7 +50,7 @@ public class UserDO extends BaseDO {
     /**
      * 是否为商户
      */
-    private Boolean isMerchant = false;
+    private Integer isMerchant = 0;
 
     /**
      * 商家编号

@@ -146,4 +146,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         }
         throw new ClientException("用户Token不存在或用户未登录");
     }
+
+    @Override
+    public Boolean userIsMerchant(Long uid) {
+        LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
+                .eq(UserDO::getUid, uid);
+        UserDO userDO = baseMapper.selectOne(queryWrapper);
+        if (userDO == null) {
+            throw new ServiceException(USER_NULL);
+        }
+        Integer result = userDO.getIsMerchant();
+        return result != null && result == 1;
+    }
+
+    @Override
+    public UserRespDTO becomeMerchant(Long uid) {
+        LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
+                .eq(UserDO::getUid, uid);
+        UserDO userDO = baseMapper.selectOne(queryWrapper);
+        if (userDO == null) {
+            throw new ServiceException(USER_NULL);
+        }
+        if (userDO.getIsMerchant() != null && userDO.getIsMerchant() == 1) {
+            throw new ServiceException(USER_IS_MERCHANT);
+        }
+
+        userDO.setIsMerchant(1);
+        UserRespDTO result = new UserRespDTO();
+        BeanUtils.copyProperties(userDO, result);
+        return result;
+    }
 }
