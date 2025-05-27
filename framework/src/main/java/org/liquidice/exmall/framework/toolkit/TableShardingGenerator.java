@@ -83,7 +83,7 @@ public class TableShardingGenerator {
                     phone         varchar(128) null comment '用户手机号',
                     email         varchar(512) null comment '用户邮箱',
                     avatar_url    varchar(512) null comment '头像图片地址',
-                    isMerchant    tinyint(1)   null comment '是否为商家标识 0：非 1：是',
+                    is_merchant    tinyint(1)   null comment '是否为商家标识 0：非 1：是',
                     shop_id       bigint       null,
                     deletion_time bigint       null comment '注销时间戳',
                     create_time   datetime     null comment '创建时间',
