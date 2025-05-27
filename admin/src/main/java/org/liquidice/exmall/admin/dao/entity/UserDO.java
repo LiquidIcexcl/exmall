@@ -55,7 +55,7 @@ public class UserDO extends BaseDO {
     /**
      * 商家编号
      */
-    private String shopId;
+    private Long shopId;
 
     /**
      * 注销时间戳

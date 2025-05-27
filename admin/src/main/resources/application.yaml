@@ -5,9 +5,7 @@ spring:
     application:
         name: exmall-admin
     datasource:
-        # ShardingSphere ? Driver ???????????????
         driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-        # ShardingSphere ??????
         url: jdbc:shardingsphere:classpath:shardingsphere-config.yaml
     data:
         redis:
