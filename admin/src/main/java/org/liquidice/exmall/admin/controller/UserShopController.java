@@ -25,7 +25,6 @@ public class UserShopController {
 
     /**
      * 用户创建商户
-     * @param uid 用户ID
      * @param requestParam 商户信息
      * @return 商户信息
      */
@@ -36,7 +35,6 @@ public class UserShopController {
 
     /**
      * 更新商户信息
-     * @param uid 用户ID
      * @param requestParam 商户信息
      */
     @PutMapping("/api/exmall/admin/v1/shop/")

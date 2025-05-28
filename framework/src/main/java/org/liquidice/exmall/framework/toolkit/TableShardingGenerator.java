@@ -76,8 +76,9 @@ public class TableShardingGenerator {
         String baseSql = """
                 create table t_user
                 (
-                    uid           bigint auto_increment comment '用户ID'
+                    id           bigint auto_increment comment 'ID'
                         primary key,
+                    uid           bigint not null comment '用户ID',
                     username      varchar(256) null comment '用户名称',
                     password      varchar(512) null comment '用户密码',
                     phone         varchar(128) null comment '用户手机号',
@@ -90,7 +91,9 @@ public class TableShardingGenerator {
                     update_time   datetime     null comment '修改时间',
                     del_flag      tinyint(1)   null comment '删除标识 0：未删除 1：已删除',
                     constraint idx_unique_username
-                        unique (username)
+                        unique (username),
+                    constraint idx_unique_uid
+                        unique (uid)
                 );
             """;
 
