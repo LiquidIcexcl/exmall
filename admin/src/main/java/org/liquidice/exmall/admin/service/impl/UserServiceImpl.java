@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.liquidice.exmall.admin.common.biz.user.UserContext;
 import org.liquidice.exmall.admin.common.biz.user.UserInfoDTO;
 import org.liquidice.exmall.admin.common.enums.UserErrorCodeEnum;
+import org.liquidice.exmall.admin.config.SnowFlakeIdGenerator;
 import org.liquidice.exmall.admin.dao.entity.UserDO;
 import org.liquidice.exmall.admin.dao.mapper.UserMapper;
 import org.liquidice.exmall.admin.dto.req.UserLoginReqDTO;
@@ -49,6 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     private final RBloomFilter<String> userRegisterCachePenetrationBloomFilter;
     private final RedissonClient redissonClient;
     private final StringRedisTemplate stringRedisTemplate;
+    private final SnowFlakeIdGenerator idGenerator;
 
     @Override
     public UserRespDTO getUserByUsername(String username) {
@@ -79,6 +81,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
             throw new ClientException(USER_NAME_EXIST);
         }
         try {
+            requestParam.setUid(idGenerator.nextId());
             int inserted = baseMapper.insert(BeanUtil.toBean(requestParam, UserDO.class));
             if (inserted < 1) {
                 throw new ClientException(USER_SAVE_ERROR);

@@ -8,6 +8,11 @@ import lombok.Data;
 @Data
 public class UserRegisterReqDTO {
     /**
+     * 用户id
+     */
+    private Long uid;
+
+    /**
      * 用户名
      */
     private String username;
