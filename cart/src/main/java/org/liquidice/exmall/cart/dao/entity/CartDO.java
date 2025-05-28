@@ -30,7 +30,17 @@ public class CartDO extends BaseDO {
     private Long productId;
 
     /**
+     * 商品细节码
+     */
+    private String productSkuCode = "";
+
+    /**
      * 商品数量
      */
     private Long productCount;
+
+    /**
+     * 商品计算价格
+     */
+    private Long productPrice;
 }
