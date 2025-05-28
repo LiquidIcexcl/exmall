@@ -52,6 +52,25 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
         try {
             CartDO cartDO = new CartDO();
             BeanUtils.copyProperties(requestParam, cartDO);
+            LambdaQueryWrapper<CartDO> queryWrapper = Wrappers.lambdaQuery(CartDO.class)
+                    .eq(CartDO::getUid, cartDO.getUid())
+                    .eq(CartDO::getProductId, cartDO.getProductId())
+                    .eq(CartDO::getDelFlag, 0);
+            CartDO existingCart = baseMapper.selectOne(queryWrapper);
+            if (existingCart != null) {
+                // 如果购物车中已存在该商品，则更新数量
+                cartDO.setCartId(existingCart.getCartId());
+                cartDO.setProductCount(existingCart.getProductCount() + requestParam.getProductCount() );
+                LambdaUpdateWrapper<CartDO> updateWrapper = Wrappers.lambdaUpdate(CartDO.class)
+                        .eq(CartDO::getCartId, existingCart.getCartId())
+                        .eq(CartDO::getDelFlag, 0);
+                boolean update = baseMapper.update(cartDO, updateWrapper) > 0;
+                if (!update) {
+                    throw new ServiceException("更新购物车失败");
+                }
+                return true;
+            }
+            // 如果购物车中不存在该商品，则插入新记录
             boolean save = baseMapper.insert(cartDO) > 0;
             if (!save) {
                 throw new ServiceException("添加到购物车失败");
