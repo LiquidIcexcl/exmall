@@ -14,6 +14,11 @@ public class ProductReqDTO {
     private Long shopId;
 
     /**
+     * 商品ID
+     */
+    private Long productId;
+
+    /**
      * 商品名称
      */
     private String productName;

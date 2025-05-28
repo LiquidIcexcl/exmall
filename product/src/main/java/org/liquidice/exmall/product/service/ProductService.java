@@ -15,7 +15,7 @@ public interface ProductService extends IService<ProductDO> {
     ProductRespDTO getProductById(Long productId);
 
     /**
-     * 新增商品信息
+     * 新增商品参数
      *
      * @param requestParam 商品请求参数
      * @return 新增结果
@@ -23,7 +23,7 @@ public interface ProductService extends IService<ProductDO> {
     Boolean addProduct(ProductReqDTO requestParam);
 
     /**
-     * 根据商品ID更新商品信息
+     * 根据商品ID更新商品参数
      *
      * @param requestParam 商品请求参数
      * @return 更新结果
@@ -31,7 +31,7 @@ public interface ProductService extends IService<ProductDO> {
     Boolean updateProduct(ProductReqDTO requestParam);
 
     /**
-     * 根据商品ID删除商品信息
+     * 根据商品ID删除商品参数
      *
      * @param productId 商品ID
      * @return 删除结果

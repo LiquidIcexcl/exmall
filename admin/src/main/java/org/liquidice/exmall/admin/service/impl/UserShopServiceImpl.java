@@ -50,13 +50,13 @@ public class UserShopServiceImpl extends ServiceImpl<UserShopMapper, UserShopDO>
         }
         userShopDO = new UserShopDO();
         BeanUtils.copyProperties(requestParam, userShopDO);
-        userShopDO.setUid(requestParam.getUid());
         boolean save = baseMapper.insert(userShopDO) > 0;
         if (!save) {
             throw new ServiceException("创建失败");
         }
         UserShopRespDTO result = new UserShopRespDTO();
         BeanUtils.copyProperties(userShopDO, result);
+        result.setShopId(getShopByUid(userShopDO.getUid()).getShopId());
         return result;
     }
 
