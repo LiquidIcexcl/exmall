@@ -47,5 +47,5 @@ public class PayRespDTO {
     /**
      * 支付金额
      */
-    private Long payAmount;
+    private Double payAmount;
 }

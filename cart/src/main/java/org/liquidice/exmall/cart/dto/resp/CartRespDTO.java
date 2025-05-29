@@ -32,5 +32,5 @@ public class CartRespDTO {
     /**
      * 商品计算价格
      */
-    private Long productPrice;
+    private Double productPrice;
 }

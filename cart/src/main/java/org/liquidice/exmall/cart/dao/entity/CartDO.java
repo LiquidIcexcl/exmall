@@ -42,5 +42,5 @@ public class CartDO extends BaseDO {
     /**
      * 商品计算价格
      */
-    private Long productPrice;
+    private Double productPrice;
 }

@@ -39,5 +39,5 @@ public class ProductDO extends BaseDO {
     /**
      * 商品基础金额
      */
-    private Long productBaseAmount;
+    private Double productBaseAmount;
 }

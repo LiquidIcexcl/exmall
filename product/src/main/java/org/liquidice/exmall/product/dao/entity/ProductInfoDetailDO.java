@@ -34,5 +34,5 @@ public class ProductInfoDetailDO extends BaseDO {
     /**
      * 商品详情金额
      */
-    private Long productDetailAmount;
+    private Double productDetailAmount;
 }

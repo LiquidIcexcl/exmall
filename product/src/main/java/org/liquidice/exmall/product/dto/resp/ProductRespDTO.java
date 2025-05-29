@@ -30,5 +30,5 @@ public class ProductRespDTO {
     /**
      * 商品基础金额
      */
-    private Long productBaseAmount;
+    private Double productBaseAmount;
 }

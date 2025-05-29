@@ -55,5 +55,5 @@ public class OrderDO extends BaseDO {
     /**
      * 订单子单价
      */
-    private Long totalPrice = 0L;
+    private Double totalPrice = 0D;
 }

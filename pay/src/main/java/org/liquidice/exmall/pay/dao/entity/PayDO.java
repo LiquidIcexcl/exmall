@@ -52,5 +52,5 @@ public class PayDO extends BaseDO {
     /**
      * 支付金额
      */
-    private Long payAmount;
+    private Double payAmount;
 }
