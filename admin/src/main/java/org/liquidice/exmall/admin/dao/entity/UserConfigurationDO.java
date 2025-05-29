@@ -19,7 +19,7 @@ public class UserConfigurationDO extends BaseDO {
     /**
      * 用户ID
      */
-    private String uid;
+    private Long uid;
 
     /**
      * 用户是否使用深色模式

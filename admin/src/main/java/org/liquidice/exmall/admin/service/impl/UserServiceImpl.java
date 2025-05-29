@@ -9,12 +9,18 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.liquidice.exmall.admin.common.biz.user.UserContext;
 import org.liquidice.exmall.admin.common.biz.user.UserInfoDTO;
 import org.liquidice.exmall.admin.common.enums.UserErrorCodeEnum;
 import org.liquidice.exmall.admin.config.SnowFlakeIdGenerator;
+import org.liquidice.exmall.admin.config.UserConfiguration;
+import org.liquidice.exmall.admin.dao.entity.UserConfigurationDO;
 import org.liquidice.exmall.admin.dao.entity.UserDO;
+import org.liquidice.exmall.admin.dao.entity.UserWalletDO;
+import org.liquidice.exmall.admin.dao.mapper.UserConfigurationMapper;
 import org.liquidice.exmall.admin.dao.mapper.UserMapper;
+import org.liquidice.exmall.admin.dao.mapper.UserWalletMapper;
 import org.liquidice.exmall.admin.dto.req.UserLoginReqDTO;
 import org.liquidice.exmall.admin.dto.req.UserRegisterReqDTO;
 import org.liquidice.exmall.admin.dto.req.UserUpdateReqDTO;
@@ -52,6 +58,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     private final StringRedisTemplate stringRedisTemplate;
     private final SnowFlakeIdGenerator idGenerator;
 
+    private final UserConfigurationMapper userConfigurationMapper;
+    private final UserWalletMapper userWalletMapper;
+
+    public void userConfigurationHandler(Long uid) {
+        UserWalletDO userWalletDO = UserWalletDO.builder()
+                .uid(uid)
+                .balance(0D)
+                .build();
+        int walletInserted = userWalletMapper.insert(userWalletDO);
+
+        UserConfigurationDO userConfiguration = UserConfigurationDO.builder()
+                .uid(uid)
+                .build();
+        int configInserted = userConfigurationMapper.insert(userConfiguration);
+
+    }
+
     @Override
     public UserRespDTO getUserByUsername(String username) {
         LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
@@ -81,11 +104,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
             throw new ClientException(USER_NAME_EXIST);
         }
         try {
-            requestParam.setUid(idGenerator.nextId());
+            Long userId = idGenerator.nextId();
+            requestParam.setUid(userId);
             int inserted = baseMapper.insert(BeanUtil.toBean(requestParam, UserDO.class));
             if (inserted < 1) {
                 throw new ClientException(USER_SAVE_ERROR);
             }
+            userConfigurationHandler(userId);
             userRegisterCachePenetrationBloomFilter.add(requestParam.getUsername());
         } catch (DuplicateKeyException ex) {
             throw new ClientException(USER_EXIST);
