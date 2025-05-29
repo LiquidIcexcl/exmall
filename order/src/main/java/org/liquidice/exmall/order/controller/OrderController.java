@@ -37,13 +37,13 @@ public class OrderController {
      * 新增订单（传入List<CartReqDTO>）
      */
     @PostMapping("/api/exmall/order/v1/order")
-    public Result<Void> createOrder(@RequestBody List<CartReqDTO> requestParam) {
-        orderService.createOrder(requestParam);
-        return Results.success();
+    public Result<Boolean> createOrder(@RequestBody List<CartReqDTO> requestParam) {
+        Boolean result = orderService.createOrder(requestParam);
+        return Results.success(result);
     }
 
     /**
-     * 更新订单状态
+         * 更新订单状态
      */
     @PutMapping("/api/exmall/order/v1/order")
     public Result<Void> updateOrder(@RequestBody OrderReqDTO requestParam) {

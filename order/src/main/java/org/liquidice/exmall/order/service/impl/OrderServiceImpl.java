@@ -65,7 +65,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
     }
 
     @Override
-    public void createOrder(List<CartReqDTO> requestParam) {
+    public Boolean createOrder(List<CartReqDTO> requestParam) {
         Long orderId = idGenerator.nextId();
         for(CartReqDTO cartReqDTO : requestParam) {
             OrderDO orderDO = OrderDO.builder()
@@ -78,6 +78,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
                 throw new ServiceException("创建订单失败");
             }
         }
+        return true;
     }
 
     @Override

@@ -18,7 +18,7 @@ public interface OrderService extends IService<OrderDO> {
 
     OrderRespDTO getOrderByOrderId(Long orderId);
 
-    void createOrder(List<CartReqDTO> requestParam);
+    Boolean createOrder(List<CartReqDTO> requestParam);
 
     void updateOrder(OrderReqDTO requestParam);
 
