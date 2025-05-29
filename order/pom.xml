@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>exmall-cart</artifactId>
+    <artifactId>exmall-order</artifactId>
 
     <dependencies>
         <dependency>
@@ -81,6 +81,30 @@
         <dependency>
             <groupId>org.liquidice.exmall</groupId>
             <artifactId>exmall-framework</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquidice.exmall</groupId>
+            <artifactId>exmall-cart</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquidice.exmall</groupId>
+            <artifactId>exmall-cart</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquidice.exmall</groupId>
+            <artifactId>exmall-cart</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquidice.exmall</groupId>
+            <artifactId>exmall-cart</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
