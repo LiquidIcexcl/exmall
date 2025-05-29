@@ -1,8 +1,11 @@
 package org.liquidice.exmall.product.dto.resp;
 
+import lombok.Data;
+
 /**
  * 商品响应数据传输对象
  */
+@Data
 public class ProductRespDTO {
     /**
      * 商品ID
