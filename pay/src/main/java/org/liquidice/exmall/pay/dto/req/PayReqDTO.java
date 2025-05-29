@@ -7,7 +7,7 @@ import lombok.Data;
  * 用于接收前端传递的支付相关请求参数
  */
 @Data
-public class payReqDTO {
+public class PayReqDTO {
 
     /**
      * 支付表自增主键ID-支付流水号

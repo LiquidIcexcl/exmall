@@ -12,7 +12,7 @@ import org.liquidice.exmall.framework.database.BaseDO;
 @NoArgsConstructor
 @Builder
 @TableName("t_pay")
-public class payDO extends BaseDO {
+public class PayDO extends BaseDO {
 
     /**
      * 支付表自增主键ID-支付流水号
