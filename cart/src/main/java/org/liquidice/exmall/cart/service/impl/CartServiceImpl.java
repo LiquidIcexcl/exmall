@@ -44,7 +44,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
                 .eq(ProductDO::getDelFlag, 0);
         ProductDO productDO = productMapper.selectOne(productQueryWrapper);
 
-        Long computePrice = cartDO.getProductCount() * (productDO.getProductBaseAmount());
+        Double computePrice = cartDO.getProductCount() * (productDO.getProductBaseAmount());
 
         LambdaUpdateWrapper<CartDO> updateWrapper = Wrappers.lambdaUpdate(CartDO.class)
                 .eq(CartDO::getCartId, cartId)

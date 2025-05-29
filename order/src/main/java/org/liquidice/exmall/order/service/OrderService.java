@@ -24,5 +24,5 @@ public interface OrderService extends IService<OrderDO> {
 
     void deleteOrder(OrderReqDTO requestParam);
 
-    Long calculateTotalPrice(Long orderId);
+    Double calculateTotalPrice(Long orderId);
 }

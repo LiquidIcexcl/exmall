@@ -119,7 +119,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
     }
 
     @Override
-    public Long calculateTotalPrice(Long orderId) {
+    public Double calculateTotalPrice(Long orderId) {
         LambdaQueryWrapper<OrderDO> queryWrapper = Wrappers.lambdaQuery(OrderDO.class)
                 .eq(OrderDO::getOrderId, orderId)
                 .eq(OrderDO::getDelFlag, 0);
@@ -128,7 +128,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
             throw new ServiceException("找不到订单ID为 " + orderId + " 的订单");
         }
 
-        long totalPrice = 0L;
+        Double totalPrice = 0D;
 
         for (OrderDO orderDO : orderDOList) {
             totalPrice += orderDO.getTotalPrice();
