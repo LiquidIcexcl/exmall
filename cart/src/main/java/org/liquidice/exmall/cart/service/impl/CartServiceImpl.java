@@ -12,6 +12,7 @@ import org.liquidice.exmall.cart.dao.entity.CartDO;
 import org.liquidice.exmall.cart.dao.entity.ProductDO;
 import org.liquidice.exmall.cart.dao.mapper.CartMapper;
 import org.liquidice.exmall.cart.dao.mapper.ProductMapper;
+import org.liquidice.exmall.cart.dto.req.CartReqDTO;
 import org.liquidice.exmall.cart.dto.resp.CartRespDTO;
 import org.liquidice.exmall.cart.service.CartService;
 import org.liquidice.exmall.framework.exception.ServiceException;
@@ -83,7 +84,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
     }
 
     @Override
-    public Boolean addToCart(CartRespDTO requestParam) {
+    public Boolean addToCart(CartReqDTO requestParam) {
         try {
             CartDO cartDO = new CartDO();
             BeanUtils.copyProperties(requestParam, cartDO);
@@ -120,7 +121,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
     }
 
     @Override
-    public Boolean updateCart(CartRespDTO requestParam) {
+    public Boolean updateCart(CartReqDTO requestParam) {
         try {
             LambdaUpdateWrapper<CartDO> updateWrapper = Wrappers.lambdaUpdate(CartDO.class)
                     .eq(CartDO::getCartId, requestParam.getCartId())
@@ -137,7 +138,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, CartDO> implements 
     }
 
     @Override
-    public Boolean deleteCart(CartRespDTO requestParam) {
+    public Boolean deleteCart(CartReqDTO requestParam) {
         try {
             LambdaUpdateWrapper<CartDO> updateWrapper = Wrappers.lambdaUpdate(CartDO.class)
                     .eq(CartDO::getCartId, requestParam.getCartId())

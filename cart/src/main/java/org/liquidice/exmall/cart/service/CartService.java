@@ -3,6 +3,7 @@ package org.liquidice.exmall.cart.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.liquidice.exmall.cart.dao.entity.CartDO;
+import org.liquidice.exmall.cart.dto.req.CartReqDTO;
 import org.liquidice.exmall.cart.dto.resp.CartRespDTO;
 
 public interface CartService extends IService<CartDO> {
@@ -29,7 +30,7 @@ public interface CartService extends IService<CartDO> {
      * @param requestParam 购物车响应DTO
      * @return 是否添加成功
      */
-    Boolean addToCart(CartRespDTO requestParam);
+    Boolean addToCart(CartReqDTO requestParam);
 
     /**
      * 更新购物车中的商品信息
@@ -37,7 +38,7 @@ public interface CartService extends IService<CartDO> {
      * @param requestParam 购物车响应DTO
      * @return 是否更新成功
      */
-    Boolean updateCart(CartRespDTO requestParam);
+    Boolean updateCart(CartReqDTO requestParam);
 
     /**
      * 删除购物车中的商品
@@ -45,5 +46,5 @@ public interface CartService extends IService<CartDO> {
      * @param requestParam 购物车响应DTO
      * @return 是否删除成功
      */
-    Boolean deleteCart(CartRespDTO requestParam);
+    Boolean deleteCart(CartReqDTO requestParam);
 }

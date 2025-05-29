@@ -2,6 +2,7 @@ package org.liquidice.exmall.cart.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
+import org.liquidice.exmall.cart.dto.req.CartReqDTO;
 import org.liquidice.exmall.cart.dto.resp.CartRespDTO;
 import org.liquidice.exmall.cart.service.CartService;
 import org.liquidice.exmall.framework.result.Result;
@@ -39,8 +40,8 @@ public class CartController {
      * 添加商品到购物车
      */
     @PostMapping("/api/exmall/cart/v1/cart")
-    public Result<Boolean> addToCart(@RequestBody CartRespDTO cartRespDTO) {
-        Boolean result = cartService.addToCart(cartRespDTO);
+    public Result<Boolean> addToCart(@RequestBody CartReqDTO cartReqDTO) {
+        Boolean result = cartService.addToCart(cartReqDTO);
         return Results.success(result);
     }
 
@@ -48,8 +49,8 @@ public class CartController {
      * 更新购物车中的商品数量
      */
     @PutMapping("/api/exmall/cart/v1/cart")
-    public Result<Boolean> updateCart(@RequestBody CartRespDTO cartRespDTO) {
-        Boolean result = cartService.updateCart(cartRespDTO);
+    public Result<Boolean> updateCart(@RequestBody CartReqDTO cartReqDTO) {
+        Boolean result = cartService.updateCart(cartReqDTO);
         return Results.success(result);
     }
 
@@ -57,8 +58,8 @@ public class CartController {
      * 删除购物车中的商品
      */
     @DeleteMapping("/api/exmall/cart/v1/cart")
-    public Result<Boolean> deleteCart(@RequestBody CartRespDTO cartRespDTO) {
-        Boolean result = cartService.deleteCart(cartRespDTO);
+    public Result<Boolean> deleteCart(@RequestBody CartReqDTO cartReqDTO) {
+        Boolean result = cartService.deleteCart(cartReqDTO);
         return Results.success(result);
     }
 
