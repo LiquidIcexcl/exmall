@@ -51,17 +51,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
     }
 
     @Override
-    public OrderRespDTO getOrderByOrderId(Long orderId) {
+    public List<OrderRespDTO> getOrderByOrderId(Long orderId) {
         LambdaQueryWrapper<OrderDO> queryWrapper = Wrappers.lambdaQuery(OrderDO.class)
                 .eq(OrderDO::getOrderId, orderId)
                 .eq(OrderDO::getDelFlag, 0);
-        OrderDO orderDO = baseMapper.selectOne(queryWrapper);
-        if (orderDO == null) {
+        List<OrderDO> orderDOList = baseMapper.selectList(queryWrapper);
+        if (orderDOList == null) {
             throw new ServiceException("找不到订单ID为 " + orderId + " 的订单");
         }
-        OrderRespDTO orderRespDTO = new OrderRespDTO();
-        BeanUtils.copyProperties(orderDO, orderRespDTO);
-        return orderRespDTO;
+        List<OrderRespDTO> orderRespDTOList = new ArrayList<>(orderDOList.size());
+        for (OrderDO orderDO : orderDOList) {
+            OrderRespDTO orderRespDTO = new OrderRespDTO();
+            BeanUtils.copyProperties(orderDO, orderRespDTO);
+            orderRespDTOList.add(orderRespDTO);
+        }
+        return orderRespDTOList;
     }
 
     @Override
@@ -71,7 +75,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
             OrderDO orderDO = OrderDO.builder()
                     .uid(cartReqDTO.getUid())
                     .orderId(orderId)
-                    .cartId(cartReqDTO.getCartId())
+                    .productId(cartReqDTO.getProductId())
+                    .productSkuCode(cartReqDTO.getProductSkuCode())
+                    .productCount(cartReqDTO.getProductCount())
+                    .totalPrice(cartReqDTO.getProductPrice())
                     .build();
             boolean saved = baseMapper.insert(orderDO) > 0;
             if (!saved) {
@@ -112,14 +119,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
     }
 
     @Override
-    public Long calculateTotalPrice(List<CartReqDTO> requestParam) {
-        if (requestParam == null || requestParam.isEmpty()) {
-            throw new ServiceException("购物车为空，无法计算总价");
+    public Long calculateTotalPrice(Long orderId) {
+        LambdaQueryWrapper<OrderDO> queryWrapper = Wrappers.lambdaQuery(OrderDO.class)
+                .eq(OrderDO::getOrderId, orderId)
+                .eq(OrderDO::getDelFlag, 0);
+        List<OrderDO> orderDOList = baseMapper.selectList(queryWrapper);
+        if (orderDOList == null || orderDOList.isEmpty()) {
+            throw new ServiceException("找不到订单ID为 " + orderId + " 的订单");
         }
+
         long totalPrice = 0L;
-        for (CartReqDTO cartReqDTO : requestParam) {
-            totalPrice += cartReqDTO.getProductPrice() * cartReqDTO.getProductCount();
+
+        for (OrderDO orderDO : orderDOList) {
+            totalPrice += orderDO.getTotalPrice();
         }
+
         return totalPrice;
     }
 }

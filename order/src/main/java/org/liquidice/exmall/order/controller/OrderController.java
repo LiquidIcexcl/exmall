@@ -29,7 +29,7 @@ public class OrderController {
      * 查询订单by orderId
      */
     @GetMapping("/api/exmall/order/v1/order/orderId/{orderId}")
-    public Result<OrderRespDTO> getOrderByOrderId(@PathVariable("orderId") Long orderId) {
+    public Result<List<OrderRespDTO>> getOrderByOrderId(@PathVariable("orderId") Long orderId) {
         return Results.success(orderService.getOrderByOrderId(orderId));
     }
 
@@ -63,9 +63,9 @@ public class OrderController {
     /**
      * 计算订单总价
      */
-    @PostMapping("/api/exmall/order/v1/order/total-price")
-    public Result<Long> calculateTotalPrice(@RequestBody List<CartReqDTO> requestParam) {
-        Long totalPrice = orderService.calculateTotalPrice(requestParam);
+    @GetMapping("/api/exmall/order/v1/order/total-price/{orderId}")
+    public Result<Long> calculateTotalPrice(@PathVariable("orderId") Long orderId) {
+        Long totalPrice = orderService.calculateTotalPrice(orderId);
         return Results.success(totalPrice);
     }
 }

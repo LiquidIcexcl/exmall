@@ -16,7 +16,7 @@ public interface OrderService extends IService<OrderDO> {
 
     List<OrderRespDTO> getOrderByUid(Long uid);
 
-    OrderRespDTO getOrderByOrderId(Long orderId);
+    List<OrderRespDTO> getOrderByOrderId(Long orderId);
 
     Boolean createOrder(List<CartReqDTO> requestParam);
 
@@ -24,5 +24,5 @@ public interface OrderService extends IService<OrderDO> {
 
     void deleteOrder(OrderReqDTO requestParam);
 
-    Long calculateTotalPrice(List<CartReqDTO> requestParam);
+    Long calculateTotalPrice(Long orderId);
 }
