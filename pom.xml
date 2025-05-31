@@ -46,6 +46,9 @@
         <!-- 产品模块：提供商品信息、分类、品牌等数据 -->
         <module>product</module>
 
+        <!-- 物流模块：提供物流数据 -->
+        <module>logistics</module>
+
     </modules>
 
 
