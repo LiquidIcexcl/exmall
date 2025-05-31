@@ -22,3 +22,6 @@ exmall:
         enable: true
         time-window: 1
         max-access-count: 20
+
+upload:
+    path: storage/exmall/upload
