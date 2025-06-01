@@ -1,8 +1,12 @@
 import React from "react";
 
-const SearchNavigation: React.FC = () => {
+interface SearchNavigationProps {
+    setCurrentPage: (value: string) => void;
+}
+
+const SearchNavigation: React.FC<SearchNavigationProps> = ({setCurrentPage}) => {
     return (
-        <div className="search-navigation">
+        <div className="search-navigation" onClick={() => setCurrentPage("SearchNavigation")}>
             <input
                 type="text"
                 placeholder="Search for products..."

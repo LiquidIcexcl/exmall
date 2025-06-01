@@ -1,13 +1,30 @@
 import React from "react";
 
-const UserPageNavigation: React.FC = () => {
+interface UserPageNavigationProps {
+    setCurrentPage: (value: string) => void;
+    isLogin?: boolean;
+}
+
+{
+
+}
+
+const UserPageNavigation: React.FC<UserPageNavigationProps> = ({setCurrentPage, isLogin}) => {
     return (
-        <button>
-            <a href="/user" className="flex items-center justify-center w-full h-full">
-                <img src="/UserIcon.png" alt="User Icon" className="h-8 w-8" />
-            </a>
-            <span className="sr-only">User Page</span>
-        </button>
+        <>
+            <div className="flex items-center justify-end w-[30vh] h-full">
+                <button className="flex h-auto w-[12vh] m-4 justify-center"
+                        onClick={() => setCurrentPage("MerchantPage")}>
+                    <p className="text-sm text-center text-white"> 商家中心</p>
+                </button>
+                <button className="flex h-auto w-[12vh] justify-center"
+                        onClick={() => setCurrentPage("UserPage")}>
+                    <p className="text-sm text-center text-white"> 个人中心</p>
+                </button>
+            </div>
+
+        </>
+
     );
 }
 
