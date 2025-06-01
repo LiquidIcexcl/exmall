@@ -39,6 +39,17 @@ public class ProductController {
     }
 
     /**
+     * 根据商品名称模糊查询商品列表
+     * @param productName 商品名称
+     * @return 商品列表
+     */
+    @GetMapping("/api/exmall/product/v1/product")
+    public Result<List<ProductRespDTO>> getProductByName(@RequestParam("productName") String productName) {
+        List<ProductRespDTO> products = productService.getProductByName(productName);
+        return Results.success(products);
+    }
+
+    /**
      * 新增商品参数
      * @param requestParam 商品请求参数
      * @return 新增结果

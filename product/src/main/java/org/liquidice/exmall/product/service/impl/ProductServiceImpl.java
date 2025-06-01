@@ -15,6 +15,8 @@ import org.liquidice.exmall.product.dto.resp.ProductRespDTO;
 import org.liquidice.exmall.product.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, ProductDO> implements ProductService {
 
@@ -93,5 +95,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, ProductDO> im
         } catch (ServiceException e) {
             return false;
         }
+    }
+
+    @Override
+    public List<ProductRespDTO> getProductByName(String productName) {
+        LambdaQueryWrapper<ProductDO> queryWrapper = Wrappers.lambdaQuery(ProductDO.class)
+                .like(ProductDO::getProductName, productName)
+                .eq(ProductDO::getDelFlag, 0); // 确保未被删除
+        List<ProductDO> productList = baseMapper.selectList(queryWrapper);
+        return BeanUtil.copyToList(productList, ProductRespDTO.class);
     }
 }
